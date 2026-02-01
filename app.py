@@ -46,7 +46,7 @@ def create_tables():
     conn.close()
 
 create_tables()
-
+app=Flask(__name__)
 @app.route("/")
 def index():
     conn = get_db()
@@ -70,7 +70,7 @@ def index():
 
     conn.close()
     return render_template("index.html", expenses=expenses, total=total, share=share, balance=balance)
-
+app=Flask(__name__)
 @app.route("/add", methods=["GET","POST"])
 def add_expense():
     conn = get_db()
@@ -95,7 +95,7 @@ def add_expense():
 
     conn.close()
     return render_template("add_expense.html", users=users)
-
+app=Flask(__name__)
 @app.route("/edit/<int:id>", methods=["GET","POST"])
 def edit(id):
     conn = get_db()
@@ -120,7 +120,7 @@ def edit(id):
     conn.close()
 
     return render_template("edit_expense.html", expense=expense, users=users)
-
+app=Flask(__name__)
 @app.route("/delete/<int:id>")
 def delete(id):
     conn = get_db()
