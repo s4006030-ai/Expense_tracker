@@ -1,0 +1,14 @@
+
+body{font-family:Arial;background:#f4f6f8;padding:20px}
+table{width:100%;background:#fff;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #ddd}
+.btn{background:#007bff;color:#fff;padding:8px 12px;border-radius:6px;text-decoration:none}
+.btn.secondary{background:#6c757d}
+.card{background:#fff;padding:20px;border-radius:10px;max-width:400px}
+input,select,button{width:100%;padding:10px;margin-bottom:10px}
+button{background:#28a745;color:#fff;border:none;border-radius:6px}
+.balance-list{list-style:none;padding:0;max-width:500px}
+.balance-list li{background:#fff;padding:12px;border-radius:8px;margin-bottom:10px;font-weight:bold}
+.positive{border-left:6px solid #28a745}
+.negative{border-left:6px solid #dc3545}
+.neutral{border-left:6px solid #6c757d}
