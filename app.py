@@ -1,14 +1,9 @@
-import os
-
-
 from flask import Flask, render_template, request, redirect
 import sqlite3
 from datetime import date
+import os
 
-
-
-
-
+app = Flask(__name__)
 
 def get_db():
     return sqlite3.connect("expense.db")
@@ -46,7 +41,7 @@ def create_tables():
     conn.close()
 
 create_tables()
-app=Flask(__name__)
+
 @app.route("/")
 def index():
     conn = get_db()
@@ -69,9 +64,13 @@ def index():
     balance = {u: round(paid[u] - share, 2) for u in users}
 
     conn.close()
-    return render_template("index.html", expenses=expenses, total=total, share=share, balance=balance)
-app=Flask(__name__)
-@app.route("/add", methods=["GET","POST"])
+    return render_template("index.html",
+                           expenses=expenses,
+                           total=total,
+                           share=share,
+                           balance=balance)
+
+@app.route("/add", methods=["GET", "POST"])
 def add_expense():
     conn = get_db()
     cur = conn.cursor()
@@ -95,44 +94,8 @@ def add_expense():
 
     conn.close()
     return render_template("add_expense.html", users=users)
-app=Flask(__name__)
-@app.route("/edit/<int:id>", methods=["GET","POST"])
-def edit(id):
-    conn = get_db()
-    cur = conn.cursor()
 
-    if request.method == "POST":
-        amount = float(request.form["amount"])
-        paid_by = request.form["paid_by"]
-        desc = request.form["description"]
-        cur.execute(
-            "UPDATE expenses SET amount=?, paid_by=?, description=? WHERE id=?",
-            (amount, paid_by, desc, id)
-        )
-        conn.commit()
-        conn.close()
-        return redirect("/")
-
-    cur.execute("SELECT * FROM expenses WHERE id=?", (id,))
-    expense = cur.fetchone()
-    cur.execute("SELECT name FROM users")
-    users = [u[0] for u in cur.fetchall()]
-    conn.close()
-
-    return render_template("edit_expense.html", expense=expense, users=users)
-app=Flask(__name__)
-@app.route("/delete/<int:id>")
-def delete(id):
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("DELETE FROM expenses WHERE id=?", (id,))
-    conn.commit()
-    conn.close()
-    return redirect("/")
-
-
-if __name__=="__main":
-    port=int(os.environ.get("PORT",5000))
-    app.run(host="0.0.0.0",port=port)
-
-
+# 🔥 THIS PART IS CRITICAL FOR RENDER 🔥
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
