@@ -125,4 +125,4 @@ def delete(id):
     conn.close()
     return redirect("/")
 
-app.run(debug=True)
+
