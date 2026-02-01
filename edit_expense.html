@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Expense</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Edit Expense</h1>
+<form method="post" class="card">
+<input name="amount" value="{{expense[1]}}" required>
+<select name="paid_by">
+{% for u in users %}
+<option value="{{u}}" {% if u==expense[2] %}selected{% endif %}>{{u}}</option>
+{% endfor %}
+</select>
+<input name="description" value="{{expense[3]}}" required>
+<button>Update</button>
+</form>
+
+<a class="btn secondary" href="/">⬅ Back</a>
+
+</body>
+</html>
