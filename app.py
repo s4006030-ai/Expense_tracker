@@ -34,7 +34,7 @@ def create_tables():
     if cur.fetchone()[0] == 0:
         cur.executemany(
             "INSERT INTO users (name) VALUES (?)",
-            [("Rohit",), ("Friend1",), ("Friend2",)]
+            [("Rohit",), ("Punit",), ("Pathan",)]
         )
 
     conn.commit()
